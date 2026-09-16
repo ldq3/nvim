@@ -1,11 +1,4 @@
-vim.pack.add({
-    "https://github.com/yetone/avante.nvim",
-	"https://github.com/MunifTanjim/nui.nvim",
-    "https://github.com/MeanderingProgrammer/render-markdown.nvim",
-    "https://github.com/nvim-lua/plenary.nvim",
-})
-
-require("avante").setup({
+local config = {
 	provider = "openai",
     providers = {
         openai = {
@@ -15,5 +8,7 @@ require("avante").setup({
             max_tokens = 8192,
         },
     },
-})
+}
+
+require("avante").setup(config)
 

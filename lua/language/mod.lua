@@ -1,9 +1,3 @@
-vim.pack.add({
-    "https://github.com/williamboman/mason.nvim",
-    "https://github.com/williamboman/mason-lspconfig.nvim",
-    "https://github.com/nvim-treesitter/nvim-treesitter",
-})
-
 vim.diagnostic.config({
   virtual_text = { prefix = "●" },
   underline = true,
@@ -11,26 +5,33 @@ vim.diagnostic.config({
   update_in_insert = false,
 })
 
-require("mason").setup({})  -- /home/cipher/.local/share/nvim/site/pack/core/opt/mason.nvim
-require("mason-lspconfig").setup({
-    ensure_installed = {
-        "lua_ls",   -- ✅这里才是放lua语言服务器
-        "pyright",
-		"rust_analyzer",
-		"ts_ls",
-    },
-    automatic_enable = true,
+vim.pack.add({
+	"https://github.com/mason-org/mason-lspconfig.nvim",
+	"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
+	"https://github.com/mason-org/mason.nvim",
 })
 
-require("nvim-treesitter.config").setup({
-    auto_install = true,
-	install_dir = vim.fn.stdpath('data') .. '/site',
-    ensure_installed = { "lua", "python", "typescript", "rust" },
-    highlight = {
-        enable = true,
-        additional_vim_regx_highlighting = false,
-    },
+-- enable mason and configure icons
+require("mason").setup({ -- setup is required
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗",
+		},
+	},
+})
+
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"lua_ls",
+		"pyright",
+	},
+})
+
+require("mason-tool-installer").setup({
+	ensure_installed = {
+	},
 })
 
 require("language.lua")
-require("language.python")

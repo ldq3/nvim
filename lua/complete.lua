@@ -1,14 +1,3 @@
-vim.pack.add({
-     "https://github.com/hrsh7th/nvim-cmp",
-     "https://github.com/hrsh7th/cmp-nvim-lsp",
-     "https://github.com/hrsh7th/cmp-buffer",
-     "https://github.com/hrsh7th/cmp-path",
-     "https://github.com/hrsh7th/cmp-cmdline",
-     "https://github.com/L3MON4D3/LuaSnip",
-     "https://github.com/saadparwaiz1/cmp_luasnip",
-     "https://github.com/rafamadriz/friendly-snippets",
-})
-
 Cmp = require("cmp")
 Luasnip = require("luasnip")
 
@@ -25,6 +14,14 @@ Cmp.setup({
         completion = Cmp.config.window.bordered(),
         documentation = Cmp.config.window.bordered(),
     },
+
+	mapping = Cmp.mapping.preset.insert({
+      ['<C-b>'] = Cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = Cmp.mapping.scroll_docs(4),
+      ['<C-k>'] = Cmp.mapping.complete(),
+      ['<C-e>'] = Cmp.mapping.abort(),
+      ['<CR>'] = Cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
 
 	formatting = {
 		format = function(entry, vim_item)
