@@ -1,7 +1,3 @@
-vim.pack.add({
-	"https://github.com/folke/lazydev.nvim",
-})
-
 vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
@@ -24,5 +20,5 @@ require("lazydev").setup({
     },
 })
 
-vim.lsp.enable({ "lua_ls" })
+vim.lsp.enable("lua_ls")
 
