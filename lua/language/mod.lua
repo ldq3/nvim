@@ -1,14 +1,10 @@
+-- https://github.com/neovim/nvim-lspconfig/tree/master/lsp
+
 vim.diagnostic.config({
   virtual_text = { prefix = "●" },
   underline = true,
   signs = true,
   update_in_insert = false,
-})
-
-vim.pack.add({
-	"https://github.com/mason-org/mason-lspconfig.nvim",
-	"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
-	"https://github.com/mason-org/mason.nvim",
 })
 
 -- enable mason and configure icons
@@ -34,28 +30,35 @@ require("mason-tool-installer").setup({
 	},
 })
 
-vim.lsp.config("lua_ls", {
-  settings = {
-    Lua = {
-      runtime = { version = "LuaJIT" },
-      diagnostics = {
-        globals = { "vim", "require" },
-      },
-      workspace = {
-        -- library = vim.api.nvim_get_runtime_file("", true),  -- 这个配置会导致 lazydev 识别错误
-        checkThirdParty = false, -- 交给lazydev接管第三方库
-      },
-      telemetry = { enable = false },
-    },
-  },
-})
+local navic = require("nvim-navic")
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("global_lsp_attach", { clear = true }),
+  callback = function(args)
+    local bufnr = args.buf
+	local client = vim.lsp.get_client_by_id(args.data.client_id)
+    local bufopts = { buffer = bufnr }
 
-require("lazydev").setup({
-    library = {
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-    },
-})
+	navic.attach(client, bufnr)
+	vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
+    buffer = bufnr,
+    callback = function()
+    	local loc = navic.get_location()
+    	vim.wo.winbar = loc
+    end
+  })
 
-vim.lsp.enable("lua_ls")
+    -- LSP快捷键（buffer局部）
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", bufopts, { desc = "LSP: Goto definition(Telescope)" }))
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", bufopts, { desc = "LSP: Goto declaration" }))
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, vim.tbl_extend("force", bufopts, { desc = "LSP: Goto implementation" }))
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", bufopts, { desc = "LSP: References" }))
+    -- vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", bufopts, { desc = "LSP: Hover doc" }))
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, vim.tbl_extend("force", bufopts, { desc = "LSP: Rename symbol" }))
+    vim.keymap.set({"n","v"}, "<leader>ca", vim.lsp.buf.code_action, vim.tbl_extend("force", bufopts, { desc = "LSP: Code Action" }))
+
+  end
+})
 
 require("language.lua")
+require("language.haskell")
+

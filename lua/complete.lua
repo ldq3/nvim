@@ -16,8 +16,6 @@ Cmp.setup({
     },
 
 	mapping = Cmp.mapping.preset.insert({
-      ['<C-b>'] = Cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = Cmp.mapping.scroll_docs(4),
       ['<C-k>'] = Cmp.mapping.complete(),
       ['<C-e>'] = Cmp.mapping.abort(),
       ['<CR>'] = Cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
