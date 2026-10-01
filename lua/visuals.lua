@@ -1,7 +1,10 @@
 vim.opt.number = true
 vim.opt.relativenumber = true
+
+vim.opt.expandtab = true  -- 将 tab 转换为空格
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
+
 vim.opt.winborder = "rounded"
 
 require("smear_cursor").setup({
@@ -38,6 +41,9 @@ require("catppuccin").setup({
 vim.cmd.colorscheme("catppuccin")
 
 require("lualine").setup({
+    options = {
+        globalstatus = true
+    }
 })
 
 require("nvim-navic").setup({
