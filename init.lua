@@ -47,6 +47,7 @@ vim.pack.add({
     { src = "https://github.com/epwalsh/obsidian.nvim", name = "obsidian" },
 
     { src = "https://github.com/Julian/lean.nvim" },
+    { src = "https://github.com/hedyhli/outline.nvim"}
 })
 
 
@@ -58,12 +59,49 @@ local function try(fn)
   end
 end
 
+require("outline").setup({
+    outline_window = {
+        position = "right", -- 右侧窗口，和Obsidian桌面版大纲位置一致
+        width = 25,
+    },
+    symbol_folding = {
+        autofold_depth = 1, -- 默认折叠H2以下
+        auto_unfold = { hovered = true },
+    },
+    providers = {
+        markdown = {
+        -- 识别ATX标题 # ## ###
+            show_numbers = true,
+        }
+    }
+})
+
+vim.keymap.set("n", "<space>o", "<cmd>Outline<CR>", { desc = "Toggle outline heading tree" })
 
 vim.g.lean_config = { mappings = true }
 require("diffview").setup({})
 require("overseer").setup({})
 require("trouble").setup({})
 require("lazygit")
+vim.opt.conceallevel = 1
+vim.opt.concealcursor = "n"
+require("obsidian").setup({
+    workspaces = {
+        { name = "self", path = "/mnt/d/kms/self/" }
+    },
+    picker = {
+        name = "telescope.nvim",
+        note_mappings = {
+            new = "<C-x>",
+            insert_link = "<C-l>",
+            bookmark = "<C-b>",
+        },
+        tag_mappings = {
+            tag_note = "<C-x>",
+            insert_tag = "<C-l>",
+        },
+    }
+})
 
 -- you will most likely also need plenary dependency if you are manually managing packages:
 -- vim.pack.add({ { src = 'https://github.com/nvim-lua/plenary.nvim'} })

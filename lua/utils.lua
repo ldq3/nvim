@@ -1,6 +1,10 @@
 require("setting.nvim-tree")
 
 local api = require("nvim-tree.api")
+-- 修改文件后缀名：r
+-- 修改文件主体名：e
+-- 修改文件路径：<C-r>
+
 vim.keymap.set("n", "<C-n>", api.tree.toggle, { noremap = true, silent = true, desc = "NvimTree Toggle" })
 vim.keymap.set("n", "<leader>e", api.tree.focus, { noremap = true, silent = true, desc = "NvimTree Focus" })
 vim.keymap.set("n", "<leader>fe", function ()
@@ -26,7 +30,7 @@ require("auto-save").setup({
         if fname == "" or vim.bo[bufnr].buftype ~= "" then
             return false
         end
-        local root = util.root_pattern(unpack({".git"}))(fname)
+        local root = util.root_pattern(unpack({".git", ".obsidian"}))(fname)
         return root ~= nil
     end,
 })
