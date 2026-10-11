@@ -61,4 +61,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 require("language.lua")
 require("language.haskell")
+require("language.obsidian")
 

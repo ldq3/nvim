@@ -6,6 +6,11 @@
 
 手动开启 lsp: `lua vim.lsp.start({name="lua_ls",cmd={"lua-language-server"},root_dir=vim.fn.stdpath("config"),settings={Lua={runtime={version="LuaJIT"},diagnostics={globals={"vim"}},workspace={checkThirdParty=false},telemetry={enable=false}}}})`
 
+信息查找
+信息存储
+信息使用
+
+外观
 
 # AI
 

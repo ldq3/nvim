@@ -1,38 +1,56 @@
-require("which-key").add({
-  { "<leader>f", group = "Find" },
-})
+require("which-key").add({{ "<leader>f", group = "Find" }, })
 
+
+local utils = require("utils.find")
 local builtin = require('telescope.builtin')
 
--- rg正则转义 + 清除换行
-local function prepare_visual_text(s)
-    -- 把换行全部替换成空格
-    s = s:gsub('\n', ' ')
-    -- rg特殊字符转义
-    s = s:gsub('[%%%*%.%+%-%?%[%]%(%)%{%}\\^%$]', '\\%0')
-    return s
-end
 
--- 可视模式映射
-vim.keymap.set('v', '<leader>fg', function()
-  vim.cmd('normal! "vy')
-  local selected_text = vim.fn.getreg('v')
+vim.keymap.set("n", "<leader>fc", builtin.live_grep, { desc = "find file content using regular expression" })
+vim.keymap.set('v', '<leader>fc', utils.find_content, { desc = "find file content with selected content" })
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "find files with selected content" })
+vim.keymap.set("v", "<leader>ff", utils.find_files, { desc = "find files with selected content" })
 
-    local text = prepare_visual_text(selected_text)
-    builtin.live_grep({
-    default_text = text
-  })
-end, { desc = "Telescope LiveGrep visual selection (no newline)" })
+require("outline").setup({
+    outline_window = {
+        position = "right",
+        width = 25,
+    },
+    symbol_folding = {
+        autofold_depth = 1, -- 默认折叠H2以下
+        auto_unfold = { hovered = true },
+    },
+    providers = {
+        markdown = {
+        -- 识别ATX标题 # ## ###
+            show_numbers = true,
+        }
+    }
+})
 
--- 普通模式
-vim.keymap.set("n", "<leader>fg", function()
-  builtin.live_grep()
-end, { desc = "Telescope: live grep empty prompt" })
 
-vim.keymap.set("n", "<leader>ff", function()
-  local word = vim.fn.expand("<cword>")
-  require("telescope.builtin").find_files({
-    default_text = word,
-  })
-end, {desc = "Telescope find files with cursor word"})
+-- outline
+vim.keymap.set("n", "<space>o", "<cmd>Outline<CR>", { desc = "toggle outline" })
 
+
+local api = require("nvim-tree.api")
+-- 修改文件后缀名：r
+-- 修改文件主体名：e
+-- 修改文件路径：<C-r>
+
+vim.keymap.set("n", "<C-n>", api.tree.toggle, { noremap = true, silent = true, desc = "toggle file explorer" })
+vim.keymap.set("n", "<leader>fe", function ()
+    if vim.fn.expand('%') == '' then
+        vim.print("no file in the current window")
+        return
+    end
+    -- 如果 tree 没打开，先打开它
+    if not api.tree.is_visible() then
+        api.tree.open({focus = false})
+    end
+    -- 定位当前文件到 tree 中
+    api.tree.find_file()
+end, { noremap = true, silent = true, desc = "find current file in file explorer" })
+
+vim.keymap.set('n', '<Leader>g', '<cmd>LazyGit<CR>', { desc = 'Open Git UI' } )
+
+require("lazygit")

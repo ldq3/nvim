@@ -1,4 +1,4 @@
-local config = {
+require("avante").setup({
 	provider = "openai",
     providers = {
         openai = {
@@ -8,7 +8,5 @@ local config = {
             max_tokens = 8192,
         },
     },
-}
-
-require("avante").setup(config)
+})
 
