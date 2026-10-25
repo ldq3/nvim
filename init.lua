@@ -1,4 +1,5 @@
 vim.pack.add({
+    { src = "https://github.com/folke/noice.nvim" },
     { src = "https://github.com/sphamba/smear-cursor.nvim" },
     { src = "https://github.com/nvim-lua/plenary.nvim" },
     { src = "https://github.com/nvim-telescope/telescope.nvim" },
@@ -6,6 +7,7 @@ vim.pack.add({
 
     { src = "https://github.com/nvim-tree/nvim-web-devicons" },
     { src = 'https://github.com/nvim-tree/nvim-tree.lua' },
+    { src = "https://github.com/MunifTanjim/nui.nvim"},
 
     "https://github.com/nvim-telescope/telescope.nvim",
     "https://github.com/folke/which-key.nvim",
@@ -24,7 +26,6 @@ vim.pack.add({
     "https://github.com/rafamadriz/friendly-snippets",
 
     "https://github.com/kdheepak/lazygit.nvim",
-    "https://github.com/nvim-lualine/lualine.nvim",
 
     "https://github.com/SmiteshP/nvim-navic",
     "https://github.com/mfussenegger/nvim-dap",
@@ -46,12 +47,17 @@ vim.pack.add({
     { src = "https://github.com/hedyhli/outline.nvim" },
     { src = "https://github.com/chentoast/marks.nvim", name = "marks"},
     { src = "https://github.com/goropikari/tabflow.nvim" },
+    { src = "https://github.com/rebelot/heirline.nvim" },
+    { src = "https://github.com/LukasPietzschmann/telescope-tabs" },
 })
 
 
-local utils = require("utils.mod")
-utils.load_all_modules("start")
+require("plugin_load")
 
+-- normal
+-- q: 开始录制宏
+-- Q: 
+-- w: 
 
 require("visuals")
 require("find")

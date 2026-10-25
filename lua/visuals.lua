@@ -40,12 +40,6 @@ require("catppuccin").setup({
 
 vim.cmd.colorscheme("catppuccin")
 
-require("lualine").setup({
-    options = {
-        globalstatus = true
-    }
-})
-
 require("nvim-navic").setup({
 })
 

@@ -9,7 +9,6 @@ require("outline").setup({
     },
     providers = {
         markdown = {
-        -- 识别ATX标题 # ## ###
             show_numbers = true,
         }
     }

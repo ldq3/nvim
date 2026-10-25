@@ -1,7 +1,8 @@
+local info = require("info")
 
 require("obsidian").setup({
     workspaces = {
-        { name = "self", path = "/mnt/d/kms/self/" }
+        info.ob_workspace
     },
     picker = {
         name = "telescope.nvim",
