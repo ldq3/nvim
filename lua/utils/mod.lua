@@ -7,4 +7,13 @@ function M.try(fn)
   end
 end
 
+
+---@param mode string
+---@param key_des table
+function M.keymap(mode, key_des)
+    for _, item in ipairs(key_des) do
+        vim.keymap.set(mode, item[1], item[2], item[3])
+    end
+end
+
 return M

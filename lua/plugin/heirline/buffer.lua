@@ -1,23 +1,4 @@
 local utils = require("heirline.utils")
-local colors = {
-    bright_bg = utils.get_highlight("Folded").bg,
-    bright_fg = utils.get_highlight("Folded").fg,
-    red = utils.get_highlight("DiagnosticError").fg,
-    dark_red = utils.get_highlight("DiffDelete").bg,
-    green = utils.get_highlight("String").fg,
-    blue = utils.get_highlight("Function").fg,
-    gray = utils.get_highlight("NonText").fg,
-    orange = utils.get_highlight("Constant").fg,
-    purple = utils.get_highlight("Statement").fg,
-    cyan = utils.get_highlight("Special").fg,
-    diag_warn = utils.get_highlight("DiagnosticWarn").fg,
-    diag_error = utils.get_highlight("DiagnosticError").fg,
-    diag_hint = utils.get_highlight("DiagnosticHint").fg,
-    diag_info = utils.get_highlight("DiagnosticInfo").fg,
-    git_del = utils.get_highlight("diffDeleted").fg,
-    git_add = utils.get_highlight("diffAdded").fg,
-    git_change = utils.get_highlight("diffChanged").fg,
-}
 
 local TablineFileName = {
     provider = function(self)
@@ -40,6 +21,7 @@ local TablineFileFlags = {
         provider = "[+]",
 
         hl = { fg = "green" },
+vim.keymap.set("n", "<leader>bx", "<cmd>TabflowCloseTab<CR>", { desc = "close buffer" })
     },
     {
         condition = function(self)
@@ -159,7 +141,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufAdd", "BufDelete", "Tab
     end
 })
 
-local BufferLine = utils.make_buflist(
+BufferLine = utils.make_buflist(
     TablineBufferBlock,
     { provider = "", hl = { fg = "gray" } }, -- left truncation, optional (defaults to "<")
     { provider = "", hl = { fg = "gray" } }, -- right trunctation, also optional (defaults to ...... yep, ">")
@@ -169,9 +151,4 @@ local BufferLine = utils.make_buflist(
     false
 )
 
-require("heirline").load_colors(colors)
-require("heirline").setup({
-    tabline = BufferLine,
-    statusline = require("plugin_conf.heirline.status"), -- require("plugin_conf.heirline.status"),
-})
-
+return BufferLine

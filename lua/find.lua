@@ -9,8 +9,6 @@ vim.keymap.set('v', '<leader>fc', utils.find_content, { desc = "find file conten
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "find files with selected content" })
 vim.keymap.set("v", "<leader>ff", utils.find_files, { desc = "find files with selected content" })
 
-vim.keymap.set("n", "<space>o", "<cmd>Outline<CR>", { desc = "toggle outline" })
-
 vim.keymap.set("n", "<leader>tl", "<cmd>Telescope telescope-tabs list_tabs<CR>", { desc = "open tab list" })
 vim.keymap.set("n", "<leader>tc", "<cmd>TabflowNewTab<CR>", { desc = "create tab" })
 vim.keymap.set("n", "<leader>tn", function()

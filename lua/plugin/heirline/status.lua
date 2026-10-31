@@ -200,11 +200,22 @@ local WorkDir = {
     }
 }
 
+
+local TabName = {
+    provider = function()
+        local state = require("tabflow.state")
+        local tname = state.state.tabs[vim.api.nvim_get_current_tabpage()].name
+        return " " .. tname
+    end,
+    hl = { fg = "blue", bold = true },
+}
+
 StatusLine = {
     ViMode, Space, -- FileEncoding,
     -- Git, Space, -- FileNameBlock, Space, Git, Space, Diagnostics, Align,
     -- DAPMessages, Align,
     WorkDir, Space,
+    TabName, Space,
     LSPActive, Space -- Space, LSPMessages, Space, UltTest, Space, FileType, Space, Ruler, Space, ScrollBar
 }
 

@@ -16,6 +16,8 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, {desc = "open diagnostic float"})
+
 require("lazydev").setup({
     library = {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },

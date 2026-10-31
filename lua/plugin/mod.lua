@@ -1,6 +1,6 @@
 --- @param pn string[] list of plugin conf
 local function load(pn)
-    local dir = "plugin_conf"
+    local dir = "plugin"
 
     for _, v in ipairs(pn) do
         if vim.uv.fs_stat(vim.fn.stdpath("config") .. '/' .. "lua" .. '/' .. dir .. '/' .. v .. '/' .. "mod.lua") ~= nil then
@@ -12,7 +12,7 @@ local function load(pn)
     end
 end
 
-local plugin_conf = {
+local conf = {
     "nvim",
     "auto-save",
     "avante",
@@ -37,5 +37,5 @@ local plugin_conf = {
 
 require("telescope").load_extension("telescope-tabs")
 
-load(plugin_conf)
+load(conf)
 
