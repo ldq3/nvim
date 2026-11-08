@@ -1,0 +1,33 @@
+-- local dap = require("dap")
+-- 
+-- local registry = require("mason-registry")
+-- 
+-- -- 安全获取 debugpy 包
+-- local function get_debugpy_adapter()
+--   local ok, pkg = pcall(registry.get_package, "debugpy")
+--   if not ok or not pkg:is_installed() then
+--     vim.notify("debugpy not installed in mason", vim.log.levels.ERROR)
+--     return nil
+--   end
+--   local pkg_path = pkg:get_install_path()
+--   return {
+--     type = "executable",
+--     command = pkg_path .. "/venv/bin/python",
+--     args = { "-m", "debugpy.adapter" },
+--   }
+-- end
+-- 
+-- dap.adapters.python = get_debugpy_adapter()
+-- 
+-- dap.configurations.python = {
+--     {
+--     type = "python",
+--     request = "launch",
+--     name = "Launch File",
+--     program = "${file}",
+--     python = function() return vim.fn.exepath("python") end,
+--     cwd = "${workspaceFolder}",
+--     console = "integratedTerminal",
+--     justMyCode = true,
+--     }
+-- }

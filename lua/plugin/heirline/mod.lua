@@ -24,5 +24,6 @@ require("heirline").load_colors(colors)
 require("heirline").setup({
     tabline = require("plugin.heirline.buffer"),
     statusline = require("plugin.heirline.status"),
+    winbar = require("plugin.heirline.winbar")
 })
 

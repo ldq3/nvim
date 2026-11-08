@@ -49,7 +49,7 @@ Cmp.setup({
         { name = "luasnip" },     -- 代码片段
         { name = "buffer" },      -- 缓冲区词汇
         { name = "path" },        -- 文件路径
-		{ name= "lazydev" },
+		{ name = "lazydev" },
     }),
 
     -- 命令行补全（: 命令模式）
@@ -62,3 +62,4 @@ Cmp.setup({
         }),
     })
 })
+

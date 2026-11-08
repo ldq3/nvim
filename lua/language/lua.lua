@@ -1,6 +1,9 @@
 vim.lsp.config("lua_ls", {
 	cmd = { 'lua-language-server' },
 	filetypes = { 'lua' },
+    root_dir = require("lspconfig.util").root_pattern(
+        ".git"
+    ),
 	settings = {
 		Lua = {
 			runtime = { version = "LuaJIT" },
@@ -10,13 +13,12 @@ vim.lsp.config("lua_ls", {
 			workspace = {
 				-- library = vim.api.nvim_get_runtime_file("", true),  -- 这个配置会导致 lazydev 识别错误
 				checkThirdParty = false, -- 交给lazydev接管第三方库
+                ignoreDir = { ".git", "node_modules", "dist" },
 			},
 			telemetry = { enable = false },
 		},
 	},
 })
-
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, {desc = "open diagnostic float"})
 
 require("lazydev").setup({
     library = {
