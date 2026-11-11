@@ -33,23 +33,16 @@ end
 
 -- K: vim.lsp.buf.hove
 
-function M.set_leader(leader)
-    local opts = { noremap = true, silent = true }
 
-    utils.keymap(leader, "n", {
-        { "a", code_action, vim.tbl_extend("force", opts, { desc = "Code Action" }) },
-        { "d", defination, vim.tbl_extend("force", opts, { desc = "Definition" }) },
-        { "D", declaration, vim.tbl_extend("force", opts, { desc = "Declaration" }) },
-        { "i", implementation, vim.tbl_extend("force", opts, { desc = "Implementation" }) },
-        { "r", reference, vim.tbl_extend("force", opts, { desc = "References" }) },
-        { "n", rename_symbol, vim.tbl_extend("force", opts, { desc = "Rename symbol" }) },
-        { "o", "<cmd>Outline<CR>", { desc = "toggle outline" } },
-        { "H", vim.diagnostic.open_float, {desc = "Open diagnostic float" }},
-    })
-
-    utils.keymap(leader, "n", {
-        { "a", code_action, vim.tbl_extend("force", opts, { desc = "Code Action" }) },
-    })
-end
+M.keys = {
+    { "n", "d", defination, { desc = "Definition" } },
+    { "n", "D", declaration, { desc = "Declaration" } },
+    { "n", "i", implementation, { desc = "Implementation" } },
+    { "n", "r", reference, { desc = "References" } },
+    { "n", "n", rename_symbol, { desc = "Rename symbol" } },
+    { "n", "o", "<cmd>Outline<CR>", { desc = "toggle outline" } },
+    { "n", "H", vim.diagnostic.open_float, { desc = "Open diagnostic float" } },
+    { "n", "a", code_action, { desc = "Code Action" } },
+}
 
 return M

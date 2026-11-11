@@ -1,4 +1,12 @@
+-- <leader>b
+local M = {}
 
-vim.keymap.set("n", "<leader>bx", "<cmd>TabflowCloseBuffer<CR>", { desc = "close buffer" })
-vim.keymap.set("n", "<C-n>", "<cmd>TabflowNextBuffer<CR>", { desc = "close buffer" })
-vim.keymap.set("n", "<C-p>", "<cmd>TabflowPrevBuffer<CR>", { desc = "close buffer" })
+M.keys = {
+    {"n", "x", "<cmd>TabflowCloseBuffer<CR>", { desc = "close buffer" }},
+}
+
+M.next = { "<cmd>TabflowNextBuffer<CR>", { desc = "next buffer" }}
+M.prev = { "<cmd>TabflowPrevBuffer<CR>", { desc = "prev buffer" }}
+
+return M
+

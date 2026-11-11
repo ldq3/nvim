@@ -37,7 +37,7 @@
 - `nvim-cmp.lua`：补全源（lsp / luasnip / buffer / path / lazydev）、菜单样式、`: 命令行补全
 - `mason*.lua` + `nvim-dap.lua` + `mason-nvim-dap.lua`：LSP/DAP 安装管理，debugpy 已配置，但 Python DAP 适配器代码整段被注释
 - `nvim-tree.lua`：文件树，自定义 `M` 键「移动文件到指定目录并保留文件名」
-- `heirline/`：手写 tabline / statusline / winbar，颜色从高亮组动态取色，winbar 与 nvim-navic 联动
+- `heirline/`：手写 tabline / statusline / winbar，颜色从高亮组动态取色，winbar 与 nvim-navic 联动；statusline 为 AstroNvim 风格（左侧模式色块 + git 分支/文件/改动/诊断，右侧 LSP / 行列位置，`mod.lua` 的 `setup_colors` 统一管理语义色）
 - `edgy` 负责布局（左侧文件树 + Outline，底部 noice 消息面板，用 filter 排除浮动窗口）
 - `avante.lua`：AI 插件，配置了 deepseek flash/pro 两个 provider、tavily 联网搜索、RAG 默认关闭
 - 其余（telescope、trouble、outline、which-key、noice、todo-comments、diffview、tabflow、auto-save、overseer、telescope-tabs）多为精简 setup；auto-save 只在 git/obsidian 仓库里生效

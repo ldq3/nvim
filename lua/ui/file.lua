@@ -1,6 +1,5 @@
 local M = {}
 
-local utils = require("ui.lib")
 local builtin = require('telescope.builtin')
 local api = require("nvim-tree.api")
 
@@ -46,23 +45,20 @@ local function file_path ()
     api.tree.find_file()
 end
 
-function M.set_leader(leader)
-    utils.keymap(leader, "n", {
-        { "e", file_path, { noremap = true, silent = true, desc = "find current file in file explorer" }},
-        { "c", builtin.live_grep, { desc = "find files content using regular expression" } },
-        { "f", builtin.find_files, { desc = "find files using regular expression" } },
-    })
-    utils.keymap(leader, "v", {
-        { 'c', find_content, { desc = "find files content with selected content" } },
-        { "f", find_files, { desc = "find files with selected content" } },
-    })
-end
+M.keys = {
+    { "n", "c", builtin.live_grep, { desc = "find files content using regular expression" } },
+    { "v", "c", find_content, { desc = "find files content with selected content" } },
+    { "n", "f", builtin.find_files, { desc = "find files using regular expression" } },
+    { "v", "f", find_files, { desc = "find files with selected content" } },
+    { "n", "e", file_path, { desc = "find current file in file explorer" }},
+}
+
+M.toggle = { api.tree.toggle, { desc = "toggle file explorer" } }
 
 -- 修改文件后缀名：r
 -- 修改文件主体名：e
 -- 修改文件路径：<C-r>
 
-vim.keymap.set("n", "<C-y>", api.tree.toggle, { noremap = true, silent = true, desc = "toggle file explorer" })
 
 return M
 
